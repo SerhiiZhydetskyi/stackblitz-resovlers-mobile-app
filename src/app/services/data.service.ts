@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {delay, Observable, of, tap} from "rxjs";
+import {LoaderService} from "./loader.service";
 
 export interface Message {
   fromName: string;
@@ -12,7 +14,7 @@ export interface Message {
   providedIn: 'root'
 })
 export class DataService {
-  public messages: Message[] = [
+  private messages: Message[] = [
     {
       fromName: 'Matt Chorsey',
       subject: 'New event: Trip to Vegas',
@@ -71,13 +73,23 @@ export class DataService {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private loaderService: LoaderService
+  ) { }
 
-  public getMessages(): Message[] {
-    return this.messages;
+  public getMessages(): Observable<Message[]> {
+    this.loaderService.isLoading.set(true);
+    return of(this.messages).pipe(
+      delay(1000),
+      tap(() => this.loaderService.isLoading.set(false))
+    );
   }
 
-  public getMessageById(id: number): Message {
-    return this.messages[id];
+  public getMessageById(id: number): Observable<Message> {
+    this.loaderService.isLoading.set(true);
+    return of(this.messages[id]).pipe(
+      delay(1000),
+      tap(() => this.loaderService.isLoading.set(false))
+    );
   }
 }

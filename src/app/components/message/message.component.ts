@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input, Input} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Platform, IonItem, IonLabel, IonNote, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronForward } from 'ionicons/icons';
-import { Message } from '../services/data.service';
+import { Message } from '../../services/data.service';
 
 @Component({
   selector: 'app-message',
@@ -15,8 +15,10 @@ import { Message } from '../services/data.service';
   imports: [CommonModule, RouterLink, IonItem, IonLabel, IonNote, IonIcon],
 })
 export class MessageComponent {
+  destination = input<string>('message')
+  message = input.required<Message>();
+
   private platform = inject(Platform);
-  @Input() message?: Message;
   isIos() {
     return this.platform.is('ios')
   }

@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Resolver demo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        Resolver demo
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card routerLink="/messages">
+    <ion-card-header>
+      <ion-card-title>CLICK HERE TO SEE</ion-card-title>
+      <ion-card-subtitle>Without resolver</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      Page data is requested when a page has been opened
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card routerLink="/messages-resolver">
+    <ion-card-header>
+      <ion-card-title>CLICK HERE TO SEE</ion-card-title>
+      <ion-card-subtitle>With resolver</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      Page data is requested before page is shown on the screen
+    </ion-card-content>
+  </ion-card>
+</ion-content>
